@@ -17,7 +17,6 @@ export default class LoginPage {
     constructor(page: Page) {
         this.page = page;
         this.navbar = new NavbarComponent(page)
-
         this.emailInput = page.getByPlaceholder('Username');
         this.passwordInput = page.getByPlaceholder('Password');
         this.loginButton = page.locator('#login-button');
@@ -36,5 +35,9 @@ export default class LoginPage {
     async verifyUserLoggedIn() {
         await expect(this.productName).toBeVisible()
     }
-}
+
+    async navigateToPDP() {
+        await this.navbar.naviagteToPDP();
+    }
+};
 
