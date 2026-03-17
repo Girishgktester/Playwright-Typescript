@@ -1,5 +1,6 @@
 import LoginPage from '@pages/LoginPage'
-import { test } from '@fixtures/loginFixture';  // ✅ FIXED
+import { test } from '@fixtures/loginFixture'; 
+import '@fixtures/baseTest';
 
 test('Valid login', async ({ loggedInPage }) => {
 
