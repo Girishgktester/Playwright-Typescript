@@ -1,20 +1,28 @@
-import { test, expect } from '@playwright/test';
 import LoginPage from '@pages/LoginPage'
-import { waitForDebugger } from 'node:inspector';
+import { test } from '@fixtures/loginFixture';  // ✅ FIXED
 
+test('Valid login', async ({ loggedInPage }) => {
 
-test('Valid login', async ({ page }) => {
-
-  const loginPage = new LoginPage(page);
-
-  await page.goto('https://www.saucedemo.com/');
-
-  await loginPage.login('standard_user', 'secret_sauce');
+  const loginPage = new LoginPage(loggedInPage);
 
   await loginPage.verifyUserLoggedIn();
-
   await loginPage.navigateToPDP();
 
-  await page.waitForTimeout(5000);
-
 });
+
+const loginData = [
+  { email: "standard_user", password: "secret_sauce", valid: true },
+  { email: "visual_user", password: "secret_sauce", valid: false }
+];
+
+
+for (const data of loginData) {
+  test(`Login test for ${data.valid ? 'valid' : 'invalid'} user`, async ({ basePage }) => {
+     const loginPage = new LoginPage(basePage);
+
+      await loginPage.login(data.email, data.password);
+
+      await loginPage.verifyUserLoggedIn();
+  });
+
+};
