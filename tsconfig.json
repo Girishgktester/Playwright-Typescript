@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@pages/*": ["src/pages/*"],
+      "@flows/*": ["src/flows/*"],
+      "@utils/*": ["src/utils/*"],
+      "@fixtures/*": ["src/fixtures/*"],
+      "@components/*": ["src/components/*"],
+      "@services/*": ["src/services/*"]
+    }
+  }
+}
