@@ -16,6 +16,8 @@ test('Register user page', async ({ page }) => {
   await registerpage.selectGenderMale();
   await registerAssert.verifyMaleSelected();
   await registerpage.fillRegistrationForm(testData.registerUser);
+
+  //commented these 2 methods dont want to register user eveyrtime and bomb website
   // await registerpage.clickRegister();
   // await registerAssert.verifyRegistrationSuccess();
 });
