@@ -27,10 +27,15 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
+    launchOptions: {
+      slowMo: 900,
+    },
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-  headless: !!process.env.CI
+    headless: !!process.env.CI,
+      channel: 'chrome'
+
   },
 
   /* Configure projects for major browsers */
@@ -38,6 +43,7 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+
     },
 
     // {
@@ -79,7 +85,7 @@ export default defineConfig({
   // },
 
 
-  
+
 
 });
 

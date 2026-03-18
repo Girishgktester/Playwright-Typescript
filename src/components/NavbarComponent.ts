@@ -1,18 +1,19 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { Page} from '@playwright/test';
 
 export default class NavbarComponent {
 
-  private productName = this.page.getByText('Sauce Labs Backpack').first();
-  private profileMenu = this.page.locator('#profile')
 
-  constructor(private page: Page) {}
+  private loginBtn = this.page.locator('.ico-login')
+  private registerBtn = this.page.getByRole('button', { name: 'Register' }).first();
 
-  async naviagteToPDP() {
-    await this.productName.click()
+  constructor(private page: Page) { }
+
+  async navigateToLoginPage() {
+    await this.loginBtn.click();
   }
 
-  async openProfile() {
-    await this.profileMenu.click()
+  async naviagetToRegisterPage() {
+    await this.registerBtn.click();
   }
 
 }

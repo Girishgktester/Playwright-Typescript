@@ -46,8 +46,5 @@ export default class LoginPage extends BasePage {
         await expect(this.productName).toBeVisible()
     }
 
-    async navigateToPDP() {
-        await this.navbar.naviagteToPDP();
-    }
 };
 

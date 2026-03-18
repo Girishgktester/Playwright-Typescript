@@ -1,4 +1,4 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { test, Page, Locator, expect } from '@playwright/test';
 
 export default class BasePage {
 
@@ -18,18 +18,21 @@ export default class BasePage {
 
   async fill(locator: Locator, value: string) {
     console.log(`Filling value: ${value}`);
-
-    await locator.fill(value);
+    await test.step(`Filling value: ${value}`, async () => {
+      await locator.fill(value);
+    });
   }
 
-  async waitForVisible(locator: Locator) {
-    console.log(`Waiting for visibility of locator: ${locator}`);
-    await expect(locator).toBeVisible();
 
+  async isDisplayed(locator: Locator, text: string) {
+    await test.step(`${text} : Locator is displayed:`, async () => {
+      await expect(locator).toBeVisible({ timeout: 5000 });
+    });
   }
 
   async getText(locator: Locator) {
     console.log(`Getting text for locator: ${locator}`);
     return await locator.textContent();
   }
+
 }

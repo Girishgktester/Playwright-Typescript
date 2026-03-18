@@ -1,14 +1,30 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "paths": {
-      "@pages/*": ["src/pages/*"],
-      "@flows/*": ["src/flows/*"],
-      "@utils/*": ["src/utils/*"],
-      "@fixtures/*": ["src/fixtures/*"],
-      "@components/*": ["src/components/*"],
-      "@services/*": ["src/services/*"],
-      "@test-data/*": ["src/test-data/*"]
+      "@pages/*": [
+        "src/pages/*"
+      ],
+      "@flows/*": [
+        "src/flows/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@fixtures/*": [
+        "src/fixtures/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@services/*": [
+        "src/services/*"
+      ],
+      "@test-data/*": [
+        "src/test-data/*"
+      ]
     }
   }
 }
