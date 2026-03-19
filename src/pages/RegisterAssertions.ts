@@ -20,4 +20,9 @@ export default class RegisterAssertions {
   async verifyRegistrationSuccess() {
     await expect(this.page.getByText('Your registration completed')).toBeVisible();
   }
+
+  async verifyDuplicateEmailErrorMessage(){
+       await expect(this.registerPage.registerErrorMsg).toBeVisible();
+  }
+
 }
