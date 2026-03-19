@@ -13,29 +13,26 @@ export default class LoginPage extends BasePage {
     readonly passwordInput: Locator;
     readonly loginButton: Locator;
     readonly productName: Locator;
+    readonly accountsBtn : Locator;
 
 
     constructor(page: Page) {
         super(page);
 
-        // this.page = page;
         this.navbar = new NavbarComponent(page)
-        this.emailInput = page.getByPlaceholder('Username');
-        this.passwordInput = page.getByPlaceholder('Password');
-        this.loginButton = page.locator('#login-button');
-        this.productName = page.getByText('Sauce Labs Backpack');
+        this.emailInput = page.locator('#Email');
+        this.passwordInput = page.locator('#Password');
+        this.loginButton = page.getByRole('button', {name : 'Log in'});
+        this.accountsBtn = page.getByRole('link', {name: 'account'})
     }
 
     async gotoUrl() {
-        await this.goto('https://www.saucedemo.com');  // ✅ using BasePage method
+        await this.goto('https://demowebshop.tricentis.com/');  // ✅ using BasePage method
     }
 
     // METHODS
     async login(email: string, password: string) {
-
-        // await this.fill(this.emailInput, email);
         await this.emailInput.fill(email);
-
         await this.passwordInput.fill(password);
         await this.loginButton.click();
     }
@@ -44,6 +41,12 @@ export default class LoginPage extends BasePage {
 
     async verifyUserLoggedIn() {
         await expect(this.productName).toBeVisible()
+    }
+
+    async naviagteToLoginPage(){
+
+        await this.navbar.navigateToLoginPage();
+
     }
 
 };

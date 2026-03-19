@@ -1,4 +1,4 @@
-import { Page} from '@playwright/test';
+import { Page } from '@playwright/test';
 
 export default class NavbarComponent {
 
@@ -15,5 +15,6 @@ export default class NavbarComponent {
   async naviagetToRegisterPage() {
     await this.registerBtn.click();
   }
+
 
 }
