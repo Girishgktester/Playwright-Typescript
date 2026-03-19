@@ -13,8 +13,18 @@ export default class LogininAssertion {
         await expect(this.loginpage.invalidUserErrorMsg).toBeVisible();
     }
 
-    async verifyUserLoggedout(){
+    async verifyUserLoggedout() {
         await expect(this.loginpage.loginBtn).toBeVisible();
+    }
+
+    async verifySessionCreated() {
+        const cookies = await this.page.context().cookies();
+        expect(cookies.find(c => c.name === 'NOPCOMMERCE.AUTH')).toBeTruthy();
+    }
+
+    async verifySessionCleared() {
+        const cookies = await this.page.context().cookies();
+        expect(cookies.find(c => c.name === 'NOPCOMMERCE.AUTH')).toBeFalsy();
     }
 
 }
