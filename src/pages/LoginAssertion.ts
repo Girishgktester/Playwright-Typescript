@@ -9,4 +9,12 @@ export default class LogininAssertion {
         await expect(this.loginpage.accountsBtn).toBeVisible();
     }
 
+    async verifyInvalidCredentialsErrorMessage() {
+        await expect(this.loginpage.invalidUserErrorMsg).toBeVisible();
+    }
+
+    async verifyUserLoggedout(){
+        await expect(this.loginpage.loginBtn).toBeVisible();
+    }
+
 }

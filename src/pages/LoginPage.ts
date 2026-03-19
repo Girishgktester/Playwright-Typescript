@@ -13,7 +13,10 @@ export default class LoginPage extends BasePage {
     readonly passwordInput: Locator;
     readonly loginButton: Locator;
     readonly productName: Locator;
-    readonly accountsBtn : Locator;
+    readonly accountsBtn: Locator;
+    readonly invalidUserErrorMsg: Locator;
+    readonly logoutBtn: Locator;
+    readonly loginBtn: Locator;
 
 
     constructor(page: Page) {
@@ -22,8 +25,12 @@ export default class LoginPage extends BasePage {
         this.navbar = new NavbarComponent(page)
         this.emailInput = page.locator('#Email');
         this.passwordInput = page.locator('#Password');
-        this.loginButton = page.getByRole('button', {name : 'Log in'});
-        this.accountsBtn = page.getByRole('link', {name: 'account'})
+        this.loginButton = page.getByRole('button', { name: 'Log in' });
+        this.accountsBtn = page.getByRole('link', { name: 'account' })
+        this.invalidUserErrorMsg = page.locator('.validation-summary-errors');
+        this.logoutBtn = page.getByRole('link', { name: 'Log out' })
+        this.loginBtn = page.getByRole('link', { name: 'Log in' });
+
     }
 
     async gotoUrl() {
@@ -43,10 +50,14 @@ export default class LoginPage extends BasePage {
         await expect(this.productName).toBeVisible()
     }
 
-    async naviagteToLoginPage(){
+    async naviagteToLoginPage() {
 
         await this.navbar.navigateToLoginPage();
 
+    }
+
+    async clickOnLogoutButton(){
+        await this.logoutBtn.click();
     }
 
 };
