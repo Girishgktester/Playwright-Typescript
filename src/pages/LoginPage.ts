@@ -51,9 +51,7 @@ export default class LoginPage extends BasePage {
     }
 
     async naviagteToLoginPage() {
-
         await this.navbar.navigateToLoginPage();
-
     }
 
     async clickOnLogoutButton() {

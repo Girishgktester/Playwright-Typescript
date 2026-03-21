@@ -3,12 +3,16 @@ import RegisterPage from '@pages/RegisterPage';
 import RegisterAssertions from '@pages/RegisterAssertions';
 import LoginPage from '@pages/LoginPage';
 import LogininAssertion from '@pages/LoginAssertion';
+import { HomePage } from '@pages/Homepage';
+import HomepageAssertion from '@pages/HomepageAssertion';
 
 type MyFixtures = {
   registerPage: RegisterPage;
   registerAssert: RegisterAssertions;
   loginPage: LoginPage;
-  loginAssertion : LogininAssertion
+  loginAssertion: LogininAssertion;
+  homePageAssertion: HomepageAssertion;
+  homePage: HomePage;
 };
 
 export const test = base.extend<MyFixtures>({
@@ -20,11 +24,20 @@ export const test = base.extend<MyFixtures>({
     await use(new RegisterAssertions(page, registerPage));
   },
 
-  loginPage : async ({page},use) => {
+  loginPage: async ({ page }, use) => {
     await use(new LoginPage(page));
   },
 
-    loginAssertion: async ({ page, loginPage }, use) => {
+  loginAssertion: async ({ page, loginPage }, use) => {
     await use(new LogininAssertion(page, loginPage));
   },
+
+  homePage: async ({ page }, use) => {
+    await use(new HomePage(page));
+  },
+
+  homePageAssertion: async ({ page, homePage }, use) => {
+    await use(new HomepageAssertion(page, homePage));
+  }
+
 });
