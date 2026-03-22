@@ -8,11 +8,15 @@ export const testData = {
     password: "wrong123"
   },
 
-  registerUser:{
-      fName: "John",
-      lName: "Taylor",
-      email: "JohnTaylor@test.com",
-      password: 'JohnAlwaysRocks',
-      confrimPwd : 'JohnAlwaysRocks'
+  registerUser: {
+    fName: "John",
+    lName: "Taylor",
+    email: "JohnTaylor@test.com",
+    password: 'JohnAlwaysRocks',
+    confrimPwd: 'JohnAlwaysRocks'
+  },
+  search: {
+    searchKey1: "Smartphone",
+    searchInvalidKey: "abcxyz"
   }
 };

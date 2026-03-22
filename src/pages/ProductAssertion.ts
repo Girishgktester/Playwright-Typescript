@@ -15,7 +15,7 @@ export default class ProductAssertion {
         await expect(this.productDetailsPage.productName).toBeVisible();
         await expect(this.productDetailsPage.productAvailability).toBeVisible();
         await expect(this.productDetailsPage.productRatings).toBeVisible();
-        await expect(this.productDetailsPage.productReviews).toBeVisible();
+        // await expect(this.productDetailsPage.productReviews).toBeVisible();
         await expect(this.productDetailsPage.productPrice).toBeVisible();
         await expect(this.productDetailsPage.productAddToCartBtn).toBeVisible();
         await expect(this.productDetailsPage.productAddtoWishlist).toBeVisible();

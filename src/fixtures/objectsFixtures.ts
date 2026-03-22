@@ -9,6 +9,8 @@ import { CartPage } from '@pages/CartPage'
 import CartAssertion from '@pages/CartAssertion'
 import ProductAssertion from '@pages/ProductAssertion';
 import { ProductDetailsPage } from '@pages/ProductDetailsPage';
+import SearchPage from '@pages/SearchPage';
+import SearchAssertions from '@pages/SearchAssertions';
 
 type MyFixtures = {
   registerPage: RegisterPage;
@@ -21,6 +23,9 @@ type MyFixtures = {
   cartAssertion: CartAssertion;
   pdp: ProductDetailsPage;
   produtAssertion: ProductAssertion;
+  searchPage: SearchPage;
+  searchAssertion: SearchAssertions
+
 };
 
 export const test = base.extend<MyFixtures>({
@@ -61,5 +66,15 @@ export const test = base.extend<MyFixtures>({
   produtAssertion: async ({ page, pdp }, use) => {
     await use(new ProductAssertion(page, pdp));
   },
+
+  searchPage: async ({ page }, use) => {
+    await use(new SearchPage(page));
+
+  },
+
+  searchAssertion: async ({ page, searchPage }, use) => {
+    await use(new SearchAssertions(page, searchPage));
+
+  }
 
 });

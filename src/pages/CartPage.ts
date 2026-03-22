@@ -12,7 +12,7 @@ export class CartPage {
 
     constructor(private page: Page) {
         this.navbar = new NavbarComponent(page)
-        this.addToCartBtnPDP = page.getByRole('link', { name: 'Smartphone' }).first();
+        this.addToCartBtnPDP = page.locator('.product-title').first();
         this.cartQty = page.locator('.ico-cart').first()
         this.cartQty = page.locator('.cart-qty').first()
         this.productQTYInCart = page.locator('.qty-input')

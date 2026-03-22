@@ -5,13 +5,10 @@ export default class NavbarComponent {
 
   private loginBtn = this.page.locator('.ico-login')
   private registerBtn = this.page.getByRole('button', { name: 'Register' }).first();
-  private booksTab = this.page.getByRole('link', { name: 'Books' })
+  private searchBar = this.page.locator('#small-searchterms')
+  private searchBtn = this.page.getByRole('button', {name : 'Search'})
   private computersTab = this.page.getByRole('link', { name: 'Computers' }).first();
   private electronicsTabS = this.page.getByRole('link', { name: 'Electronics' })
-  private ApparelsTab = this.page.getByRole('link', { name: 'Apparel & Shoes' })
-  private digitialDownloadsTab = this.page.getByRole('link', { name: 'Digital downloads' })
-  private jewelryTab = this.page.getByRole('link', { name: 'Jewelry' })
-  private gitCardsTab = this.page.getByRole('link', { name: 'Gift Cards' })
 
 
   constructor(private page: Page) { }
@@ -37,6 +34,11 @@ export default class NavbarComponent {
 
   async getElectronic() {
     return this.electronicsTabS;
+  }
+
+  async inputSearch(searchText: string) {
+    await this.searchBar.fill(searchText)
+    await this.searchBtn.click();
   }
 
 
