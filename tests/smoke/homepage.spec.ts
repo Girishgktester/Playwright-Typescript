@@ -7,8 +7,9 @@ const menuData = [
 ];
 
 for (const menu of menuData) {
-  test(`Verify ${menu.main} menu`, async ({ loginPage, homePage, homePageAssertion }) => {
-    await loginPage.gotoUrl();
+  test(`Verify ${menu.main} menu`, async ({ basePage, homePage, homePageAssertion }) => {
+  await basePage.goto("https://demowebshop.tricentis.com/");
+    
     await homePage.navigateToMenu(menu.main);
     await homePageAssertion.verifyMenuItems(menu.sub);
   });

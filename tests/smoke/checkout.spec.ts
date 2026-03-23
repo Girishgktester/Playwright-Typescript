@@ -1,7 +1,7 @@
 import { test } from '@fixtures/objectsFixtures';
 
-test('Add invalid quantity', async ({ loginPage,homePage, homePageAssertion,cartPage, produtAssertion, pdp, checkoutAssertion , checkoutPage }) => {
- await loginPage.gotoUrl();
+test('Add invalid quantity', async ({ homePage, homePageAssertion,cartPage, produtAssertion, pdp, checkoutAssertion , checkoutPage , basePage }) => {
+  await basePage.goto("https://demowebshop.tricentis.com/");
   await homePage.navigateToMenu('Electronics');
   await homePageAssertion.navigateToSubMenu('Cell phones');
   await cartPage.naviagteToPDP();
