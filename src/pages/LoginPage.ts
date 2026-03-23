@@ -1,14 +1,10 @@
 import { Page, Locator, expect } from '@playwright/test';
 import NavbarComponent from '../components/NavbarComponent';
-
 import BasePage from '@utils/BasePage';
 
 export default class LoginPage extends BasePage {
 
     navbar: NavbarComponent
-    // readonly page: Page;
-
-    // LOCATORS   
     readonly emailInput: Locator;
     readonly passwordInput: Locator;
     readonly loginButton: Locator;
@@ -18,10 +14,8 @@ export default class LoginPage extends BasePage {
     readonly logoutBtn: Locator;
     readonly loginBtn: Locator;
 
-
     constructor(page: Page) {
         super(page);
-
         this.navbar = new NavbarComponent(page)
         this.emailInput = page.locator('#Email');
         this.passwordInput = page.locator('#Password');
@@ -30,7 +24,6 @@ export default class LoginPage extends BasePage {
         this.invalidUserErrorMsg = page.locator('.validation-summary-errors');
         this.logoutBtn = page.getByRole('link', { name: 'Log out' })
         this.loginBtn = page.getByRole('link', { name: 'Log in' });
-
     }
 
     async gotoUrl() {
@@ -43,8 +36,6 @@ export default class LoginPage extends BasePage {
         await this.passwordInput.fill(password);
         await this.loginButton.click();
     }
-
-    // ASSERTIONS
 
     async verifyUserLoggedIn() {
         await expect(this.productName).toBeVisible()
