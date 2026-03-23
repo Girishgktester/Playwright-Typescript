@@ -1,7 +1,6 @@
 import { test as base } from '@playwright/test';
 import RegisterPage from '@pages/RegisterPage';
 import RegisterAssertions from '@pages/RegisterAssertions';
-import LoginPage from '@pages/LoginPage';
 import LogininAssertion from '@pages/LoginAssertion';
 import { HomePage } from '@pages/Homepage';
 import HomepageAssertion from '@pages/HomepageAssertion';
@@ -11,11 +10,13 @@ import ProductAssertion from '@pages/ProductAssertion';
 import { ProductDetailsPage } from '@pages/ProductDetailsPage';
 import SearchPage from '@pages/SearchPage';
 import SearchAssertions from '@pages/SearchAssertions';
+import { CheckoutPage } from '@pages/CheckoutPage';
+import CheckoutAssertion from '@pages/CheckoutAssertion';
+import BasePage from '@utils/BasePage';
 
 type MyFixtures = {
   registerPage: RegisterPage;
   registerAssert: RegisterAssertions;
-  loginPage: LoginPage;
   loginAssertion: LogininAssertion;
   homePageAssertion: HomepageAssertion;
   homePage: HomePage;
@@ -24,7 +25,10 @@ type MyFixtures = {
   pdp: ProductDetailsPage;
   produtAssertion: ProductAssertion;
   searchPage: SearchPage;
-  searchAssertion: SearchAssertions
+  searchAssertion: SearchAssertions;
+  checkoutPage: CheckoutPage;
+  checkoutAssertion: CheckoutAssertion;
+  basePage : BasePage;
 
 };
 
@@ -35,14 +39,6 @@ export const test = base.extend<MyFixtures>({
 
   registerAssert: async ({ page, registerPage }, use) => {
     await use(new RegisterAssertions(page, registerPage));
-  },
-
-  loginPage: async ({ page }, use) => {
-    await use(new LoginPage(page));
-  },
-
-  loginAssertion: async ({ page, loginPage }, use) => {
-    await use(new LogininAssertion(page, loginPage));
   },
 
   homePage: async ({ page }, use) => {
@@ -75,6 +71,23 @@ export const test = base.extend<MyFixtures>({
   searchAssertion: async ({ page, searchPage }, use) => {
     await use(new SearchAssertions(page, searchPage));
 
-  }
+  },
+
+  checkoutPage: async ({ page }, use) => {
+    await use(new CheckoutPage(page));
+
+  },
+
+  checkoutAssertion: async ({ page, checkoutPage }, use) => {
+    await use(new CheckoutAssertion(page, checkoutPage));
+
+  },
+
+  basePage: async ({ page }, use) => {
+    await use(new BasePage(page));
+
+  },
+
+  
 
 });

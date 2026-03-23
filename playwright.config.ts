@@ -12,6 +12,7 @@ import 'tsconfig-paths/register';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  globalSetup: './global-setup.ts',
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -27,6 +28,8 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
+    // storageState: 'storageState.json',
+
     launchOptions: {
       slowMo: 900,
     },
@@ -34,7 +37,7 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     headless: !!process.env.CI,
-      channel: 'chrome'
+    channel: 'chrome'
 
   },
 
