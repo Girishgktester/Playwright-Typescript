@@ -1,11 +1,10 @@
 import { test } from '@fixtures/objectsFixtures';
+import'@fixtures/baseTest';
 
 // 🔹 GUEST TESTS (no login)
-test.describe(' =Guest cart flow',{tag: ['@smoke']},  () => {
+test.describe('Guest cart flow',{tag: ['@smoke']},  () => {
   test.use({ storageState: undefined });
   test('Add invalid quantity', async ({ homePage, homePageAssertion, cartPage, produtAssertion, pdp, basePage, page }) => {
-    console.log(await page.context().storageState());
-    await basePage.goto("https://demowebshop.tricentis.com/");
     await homePage.navigateToMenu('Electronics');
     await homePageAssertion.navigateToSubMenu('Cell phones');
     await cartPage.naviagteToPDP();
@@ -19,7 +18,6 @@ test.describe(' =Guest cart flow',{tag: ['@smoke']},  () => {
 test.describe('User cart flow',{tag: ['@smoke']},  () => {
   test.use({ storageState: 'storageState.json' });
   test('Add to cart (CORE FLOW)', async ({ homePage, homePageAssertion, cartPage, produtAssertion, pdp, cartAssertion, basePage }) => {
-    await basePage.goto("https://demowebshop.tricentis.com/");
     await homePage.navigateToMenu('Electronics');
     await homePageAssertion.navigateToSubMenu('Cell phones');
     await cartPage.naviagteToPDP();
@@ -37,9 +35,7 @@ test.describe('User cart flow',{tag: ['@smoke']},  () => {
 });
 
 
-test('Add invalid quantitys',{tag: ['@regression']},  async ({ homePage, homePageAssertion, cartPage, produtAssertion, pdp, basePage, page }) => {
-  console.log(await page.context().storageState());
-  await basePage.goto("https://demowebshop.tricentis.com/");
+test('Add invalid quantitys',{tag: ['@smoke']},  async ({ homePage, homePageAssertion, cartPage, produtAssertion, pdp, basePage, page }) => {
   await homePage.navigateToMenu('Electronics');
   await homePageAssertion.navigateToSubMenu('Cell phones');
   await cartPage.naviagteToPDP();
