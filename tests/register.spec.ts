@@ -2,7 +2,7 @@ import { test } from '@fixtures/objectsFixtures';
 import { testData } from '@test-data/users';
 
 
-test('Register user page', async ({registerPage , registerAssert }) => {
+test('Register user page',{tag: ['@smoke']}, async ({registerPage , registerAssert }) => {
   await registerPage.navigate();
   await registerPage.navigateToRegisterUserPage();
   await registerPage.navigateToRegisterPage()
@@ -12,7 +12,7 @@ test('Register user page', async ({registerPage , registerAssert }) => {
   await registerPage.fillRegistrationForm(testData.registerUser);
 });
 
-test('Register wiith exisiting email', async ({ registerPage , registerAssert }) => {
+test('Register wiith exisiting email',{tag: ['@regression']}, async ({ registerPage , registerAssert }) => {
   await registerPage.navigate();
   await registerPage.navigateToRegisterUserPage();
   await registerPage.navigateToRegisterPage()

@@ -7,7 +7,7 @@ const menuData = [
 ];
 
 for (const menu of menuData) {
-  test(`Verify ${menu.main} menu`, async ({ basePage, homePage, homePageAssertion }) => {
+  test(`Verify ${menu.main} menu`,{tag: ['@smoke']},  async ({ basePage, homePage, homePageAssertion }) => {
   await basePage.goto("https://demowebshop.tricentis.com/");
     
     await homePage.navigateToMenu(menu.main);

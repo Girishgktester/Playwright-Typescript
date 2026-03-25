@@ -1,6 +1,6 @@
 import { test } from '@fixtures/objectsFixtures';
 
-test('Add invalid quantity', async ({ homePage, homePageAssertion,cartPage, produtAssertion, pdp, checkoutAssertion , checkoutPage , basePage }) => {
+test('Add invalid quantity',{tag: ['@smoke']},  async ({ homePage, homePageAssertion,cartPage, produtAssertion, pdp, checkoutAssertion , checkoutPage , basePage }) => {
   await basePage.goto("https://demowebshop.tricentis.com/");
   await homePage.navigateToMenu('Electronics');
   await homePageAssertion.navigateToSubMenu('Cell phones');
