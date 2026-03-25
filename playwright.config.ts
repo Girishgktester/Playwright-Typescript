@@ -1,4 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
+import * as dotenv from 'dotenv';
+
+// 🔥 Load correct env file
+dotenv.config({
+  path: `.env.${process.env.TEST_ENV || 'dev'}`
+});
 
 export default defineConfig({
   globalSetup: './global-setup.ts',
@@ -25,8 +31,8 @@ export default defineConfig({
 
   projects: [
     {
-      name: 'Microsoft Edge',
-      use: { ...devices['Desktop Edge'], channel: 'msedge' },
+      name: 'chromium',
+    use: { ...devices['Desktop Chrome'] },
     },
   ],
 });

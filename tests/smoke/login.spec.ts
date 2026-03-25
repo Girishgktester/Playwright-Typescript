@@ -1,6 +1,9 @@
 // import { test } from '@fixtures/loggedInFixture';
 // import { testData } from '@test-data/users';
 
+// import {  } from '@fixtures/objectsFixtures';
+
+
 
 // test('Valid login',{tag : ['@smoke']}, async ({ loginPage, loginAssertion , basePage }) => {
 //       await basePage.goto( process.env.BASE_URL)
