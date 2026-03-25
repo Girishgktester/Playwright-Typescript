@@ -1,19 +1,24 @@
 import { chromium } from '@playwright/test';
+import * as dotenv from 'dotenv';
 import LoginPage from '@pages/LoginPage';
-import { testData } from '@test-data/users';
+
+dotenv.config({ path: './.env.dev' });
 
 export default async function globalSetup() {
-  const browser = await chromium.launch();
-  const page = await browser.newPage();
 
+  const browser = await chromium.launch({ slowMo: 300, });
+  const context = await browser.newContext();
+  const page = await context.newPage();
   const loginPage = new LoginPage(page);
 
-  await loginPage.gotoUrl();
+
+  await page.goto(process.env.BASE_URL!, { waitUntil: 'domcontentloaded', timeout: 60000, });
+
+
   await loginPage.navbar.navigateToLoginPage();
+  await loginPage.login(process.env.USER!, process.env.PASSWORD!);
 
-  await loginPage.login(testData.registerUser.email, testData.registerUser.password);
-
-  await page.context().storageState({ path: 'storageState.json' });
+  await context.storageState({ path: 'storageState.json' });
 
   await browser.close();
 }

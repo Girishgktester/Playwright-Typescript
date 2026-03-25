@@ -26,10 +26,6 @@ export default class LoginPage extends BasePage {
         this.loginBtn = page.getByRole('link', { name: 'Log in' });
     }
 
-    async gotoUrl() {
-        await this.goto('https://demowebshop.tricentis.com/');  // ✅ using BasePage method
-    }
-
     async login(email: string, password: string) {
         await this.emailInput.fill(email);
         await this.passwordInput.fill(password);
@@ -38,7 +34,7 @@ export default class LoginPage extends BasePage {
 
     async verifyUserLoggedIn() {
         await expect(this.productName).toBeVisible()
-     }
+    }
 
     async naviagteToLoginPage() {
         await this.navbar.navigateToLoginPage();

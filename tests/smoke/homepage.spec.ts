@@ -1,5 +1,4 @@
 import { test } from '@fixtures/objectsFixtures';
-import { testData } from '@test-data/users';
 
 const menuData = [
   { main: 'Computers', sub: ['Desktops', 'Notebooks', 'Accessories'] },
@@ -7,9 +6,8 @@ const menuData = [
 ];
 
 for (const menu of menuData) {
-  test(`Verify ${menu.main} menu`,{tag: ['@smoke']},  async ({ basePage, homePage, homePageAssertion }) => {
-  await basePage.goto("https://demowebshop.tricentis.com/");
-    
+  test(`Verify ${menu.main} menu`, { tag: ['@smoke'] }, async ({ basePage, homePage, homePageAssertion }) => {
+    await basePage.goto(process.env.BASE_URL)
     await homePage.navigateToMenu(menu.main);
     await homePageAssertion.verifyMenuItems(menu.sub);
   });
