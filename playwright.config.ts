@@ -16,8 +16,9 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 4 : undefined,
 
-  reporter: 'html',
-
+  reporter: [
+  ['blob']
+],
   use: {
     baseURL: process.env.BASE_URL,
 
@@ -32,7 +33,7 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-    use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'] },
     },
   ],
 });
