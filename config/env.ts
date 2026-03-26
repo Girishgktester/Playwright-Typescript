@@ -1,5 +1,8 @@
 import * as dotenv from 'dotenv';
-
+dotenv.config({
+  path: '.env.dev',
+  quiet: true
+});
 // Load env based on TEST_ENV
 const envFile = `.env.${process.env.TEST_ENV || 'dev'}`;
 dotenv.config({ path: envFile });

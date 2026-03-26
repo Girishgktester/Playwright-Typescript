@@ -7,7 +7,6 @@ export default class BasePage {
   }
 
   async goto(url: string) {
-    console.log(`Navigating to URL: ${url}`);
     await this.page.goto(url);
   }
 

@@ -43,5 +43,9 @@ export default class LoginPage extends BasePage {
     async clickOnLogoutButton() {
         await this.logoutBtn.click();
     }
+
+    async gotourl(){
+        await this.goto('/')
+    }
 };
 

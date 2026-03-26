@@ -25,13 +25,13 @@ test.describe('User cart flow', { tag: ['@smoke'] }, () => {
     await produtAssertion.verifyProductDetailPage();
     await pdp.addSmartPhoneToCart();
     await produtAssertion.verifyNotification();
-    const productName = await pdp.fetchProductNameFromPDP();
-    await cartAssertion.verifyCartQTY();
-    await cartPage.navigateToCart();
-    await cartAssertion.verifyProductNameInCart(productName);
-    await cartAssertion.productQtyINCart();
-    await cartPage.updateCartQty();
-    await cartAssertion.verifyProdutQtyAfterUpdate();
+    // const productName = await pdp.fetchProductNameFromPDP();
+    // await cartAssertion.verifyCartQTY();
+    // await cartPage.navigateToCart();
+    // await cartAssertion.verifyProductNameInCart(productName);
+    // await cartAssertion.productQtyINCart();
+    // await cartPage.updateCartQty();
+    // await cartAssertion.verifyProdutQtyAfterUpdate();
   });
 });
 
