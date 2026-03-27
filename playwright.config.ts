@@ -16,9 +16,17 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 4 : undefined,
 
-  reporter: [
-  ['blob']
+//   reporter: [
+//   ['blob']
+// ],
+
+reporter: [
+  ['blob'],
+  ['html'],
+  ['./custom-reporter.ts']
 ],
+
+
   use: {
     baseURL: process.env.BASE_URL,
 
