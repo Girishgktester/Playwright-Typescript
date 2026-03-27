@@ -1,0 +1,353 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      font-family: Arial;
+      margin: 0;
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+
+    .container { padding: 20px; max-width: 1200px; margin: auto; }
+
+    .banner {
+      text-align: center;
+      padding: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      background: #14532d;
+    }
+
+    .timestamp {
+      text-align: center;
+      font-size: 12px;
+      opacity: 0.7;
+      margin-bottom: 20px;
+    }
+
+    .cards {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      flex: 1;
+      padding: 12px;
+      background: #1e293b;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .passed { color: #22c55e; }
+    .failed { color: #ef4444; }
+    .flaky { color: #f59e0b; }
+
+    .progress {
+      background: #334155;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 18px;
+      margin: 15px 0;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #22c55e;
+      width: 100%;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    input {
+      padding: 10px;
+      width: 100%;
+      margin: 15px 0;
+      border-radius: 8px;
+      border: none;
+    }
+
+    .filters button {
+      margin-right: 8px;
+      padding: 6px 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #334155;
+      color: white;
+    }
+
+    .filters button.active {
+      background: #22c55e;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #1e293b;
+    }
+
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #334155;
+    }
+
+    tr:hover { background: #334155; }
+
+    .hidden { display: none; }
+
+    .error-box {
+      background: #7f1d1d;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      white-space: pre-wrap;
+    }
+
+    .chart-container {
+      width: 300px;
+      margin: 20px auto;
+    }
+
+    .section { margin-top: 25px; }
+  </style>
+</head>
+
+<body>
+<div class="container">
+
+  <div class="banner">
+    ✅ ALL TESTS PASSED
+  </div>
+
+  <div class="timestamp">
+    Run at: 3/27/2026, 5:34:47 PM
+  </div>
+
+  <div class="cards">
+    <div class="card">Total<br>14</div>
+    <div class="card passed">Passed<br>14</div>
+    <div class="card failed">Failed<br>0</div>
+    <div class="card flaky">Flaky<br>0</div>
+    <div class="card">Duration<br>20.879s</div>
+  </div>
+
+  <div class="progress">
+    <div class="progress-bar">100%</div>
+  </div>
+
+  <h3 style="text-align:center;color:#22c55e;">System Stable - No Failures</h3>
+
+  <div class="section">
+    <h3>🔥 Slowest Tests</h3>
+    <ul>
+      <li>Add invalid quantity (9085ms)</li><li>Add to cart (CORE FLOW) (8865ms)</li><li>Add invalid quantity (8522ms)</li><li>Register wiith exisiting email (8414ms)</li><li>Add invalid quantitys (8339ms)</li>
+    </ul>
+  </div>
+
+  <input type="text" id="search" placeholder="Search tests...">
+
+  <div class="filters">
+    <button onclick="filterTests('all', this)" class="active">All</button>
+    <button onclick="filterTests('failed', this)">Failed</button>
+    <button onclick="filterTests('passed', this)">Passed</button>
+    <button onclick="filterTests('flaky', this)">Flaky</button>
+  </div>
+
+  <div class="section">
+    <h3>📋 Test Results</h3>
+    <table id="table">
+      <tr><th>Name</th><th>Status</th><th>Duration</th></tr>
+      
+        <tr data-status="passed" onclick="toggleError(0)">
+          <td>Verify Computers menu</td>
+          <td class="passed">passed</td>
+          <td>7076</td>
+        </tr>
+        <tr id="error-0" class="hidden">
+          <td colspan="3">
+            
+          </td>
+        </tr>
+      
+        <tr data-status="passed" onclick="toggleError(1)">
+          <td>Verify Electronics menu</td>
+          <td class="passed">passed</td>
+          <td>6343</td>
+        </tr>
+        <tr id="error-1" class="hidden">
+          <td colspan="3">
+            
+          </td>
+        </tr>
+      
+        <tr data-status="passed" onclick="toggleError(2)">
+          <td>Register user page</td>
+          <td class="passed">passed</td>
+          <td>7927</td>
+        </tr>
+        <tr id="error-2" class="hidden">
+          <td colspan="3">
+            
+          </td>
+        </tr>
+      
+        <tr data-status="passed" onclick="toggleError(3)">
+          <td>Register wiith exisiting email</td>
+          <td class="passed">passed</td>
+          <td>8414</td>
+        </tr>
+        <tr id="error-3" class="hidden">
+          <td colspan="3">
+            
+          </td>
+        </tr>
+      
+        <tr data-status="passed" onclick="toggleError(4)">
+          <td>Add invalid quantitys</td>
+          <td class="passed">passed</td>
+          <td>8339</td>
+        </tr>
+        <tr id="error-4" class="hidden">
+          <td colspan="3">
+            
+          </td>
+        </tr>
+      
+        <tr data-status="passed" onclick="toggleError(5)">
+          <td>Add invalid quantity</td>
+          <td class="passed">passed</td>
+          <td>8522</td>
+        </tr>
+        <tr id="error-5" class="hidden">
+          <td colspan="3">
+            
+          </td>
+        </tr>
+      
+        <tr data-status="passed" onclick="toggleError(6)">
+          <td>Add to cart (CORE FLOW)</td>
+          <td class="passed">passed</td>
+          <td>8865</td>
+        </tr>
+        <tr id="error-6" class="hidden">
+          <td colspan="3">
+            
+          </td>
+        </tr>
+      
+        <tr data-status="passed" onclick="toggleError(7)">
+          <td>Add invalid quantity</td>
+          <td class="passed">passed</td>
+          <td>9085</td>
+        </tr>
+        <tr id="error-7" class="hidden">
+          <td colspan="3">
+            
+          </td>
+        </tr>
+      
+        <tr data-status="passed" onclick="toggleError(8)">
+          <td>Valid login</td>
+          <td class="passed">passed</td>
+          <td>3402</td>
+        </tr>
+        <tr id="error-8" class="hidden">
+          <td colspan="3">
+            
+          </td>
+        </tr>
+      
+        <tr data-status="passed" onclick="toggleError(9)">
+          <td>Login with invalid credentials</td>
+          <td class="passed">passed</td>
+          <td>4431</td>
+        </tr>
+        <tr id="error-9" class="hidden">
+          <td colspan="3">
+            
+          </td>
+        </tr>
+      
+        <tr data-status="passed" onclick="toggleError(10)">
+          <td>Logout flow</td>
+          <td class="passed">passed</td>
+          <td>4291</td>
+        </tr>
+        <tr id="error-10" class="hidden">
+          <td colspan="3">
+            
+          </td>
+        </tr>
+      
+        <tr data-status="passed" onclick="toggleError(11)">
+          <td>@smoke Search with valid keyword</td>
+          <td class="passed">passed</td>
+          <td>4041</td>
+        </tr>
+        <tr id="error-11" class="hidden">
+          <td colspan="3">
+            
+          </td>
+        </tr>
+      
+        <tr data-status="passed" onclick="toggleError(12)">
+          <td>Search with invalid keyword</td>
+          <td class="passed">passed</td>
+          <td>4191</td>
+        </tr>
+        <tr id="error-12" class="hidden">
+          <td colspan="3">
+            
+          </td>
+        </tr>
+      
+        <tr data-status="passed" onclick="toggleError(13)">
+          <td>Navigate category → product list → PDP</td>
+          <td class="passed">passed</td>
+          <td>4551</td>
+        </tr>
+        <tr id="error-13" class="hidden">
+          <td colspan="3">
+            
+          </td>
+        </tr>
+      
+    </table>
+  </div>
+
+</div>
+
+<script>
+  
+
+  function filterTests(status, btn) {
+    document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.querySelectorAll('#table tr[data-status]').forEach(row => {
+      row.style.display = (status === 'all' || row.dataset.status === status) ? '' : 'none';
+    });
+  }
+
+  function toggleError(i) {
+    document.getElementById('error-' + i).classList.toggle('hidden');
+  }
+
+  document.getElementById('search').addEventListener('input', function(e) {
+    const val = e.target.value.toLowerCase();
+    document.querySelectorAll('#table tr[data-status]').forEach(row => {
+      row.style.display = row.innerText.toLowerCase().includes(val) ? '' : 'none';
+    });
+  });
+</script>
+
+</body>
+</html>

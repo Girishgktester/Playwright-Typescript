@@ -1,0 +1,124 @@
+{
+  "summary": {
+    "status": "passed",
+    "total": 14,
+    "passed": 14,
+    "failed": 0,
+    "flaky": 0,
+    "duration": 20.879
+  },
+  "tests": [
+    {
+      "name": "Verify Computers menu",
+      "status": "passed",
+      "duration": 7076,
+      "retries": 0,
+      "error": null,
+      "file": "C:\\Users\\Girish Kulkarni\\Documents\\Playwright master framework\\tests\\smoke\\homepage.spec.ts"
+    },
+    {
+      "name": "Verify Electronics menu",
+      "status": "passed",
+      "duration": 6343,
+      "retries": 0,
+      "error": null,
+      "file": "C:\\Users\\Girish Kulkarni\\Documents\\Playwright master framework\\tests\\smoke\\homepage.spec.ts"
+    },
+    {
+      "name": "Register user page",
+      "status": "passed",
+      "duration": 7927,
+      "retries": 0,
+      "error": null,
+      "file": "C:\\Users\\Girish Kulkarni\\Documents\\Playwright master framework\\tests\\register.spec.ts"
+    },
+    {
+      "name": "Register wiith exisiting email",
+      "status": "passed",
+      "duration": 8414,
+      "retries": 0,
+      "error": null,
+      "file": "C:\\Users\\Girish Kulkarni\\Documents\\Playwright master framework\\tests\\register.spec.ts"
+    },
+    {
+      "name": "Add invalid quantitys",
+      "status": "passed",
+      "duration": 8339,
+      "retries": 0,
+      "error": null,
+      "file": "C:\\Users\\Girish Kulkarni\\Documents\\Playwright master framework\\tests\\smoke\\cart.spec.ts"
+    },
+    {
+      "name": "Add invalid quantity",
+      "status": "passed",
+      "duration": 8522,
+      "retries": 0,
+      "error": null,
+      "file": "C:\\Users\\Girish Kulkarni\\Documents\\Playwright master framework\\tests\\smoke\\checkout.spec.ts"
+    },
+    {
+      "name": "Add to cart (CORE FLOW)",
+      "status": "passed",
+      "duration": 8865,
+      "retries": 0,
+      "error": null,
+      "file": "C:\\Users\\Girish Kulkarni\\Documents\\Playwright master framework\\tests\\smoke\\cart.spec.ts"
+    },
+    {
+      "name": "Add invalid quantity",
+      "status": "passed",
+      "duration": 9085,
+      "retries": 0,
+      "error": null,
+      "file": "C:\\Users\\Girish Kulkarni\\Documents\\Playwright master framework\\tests\\smoke\\cart.spec.ts"
+    },
+    {
+      "name": "Valid login",
+      "status": "passed",
+      "duration": 3402,
+      "retries": 0,
+      "error": null,
+      "file": "C:\\Users\\Girish Kulkarni\\Documents\\Playwright master framework\\tests\\smoke\\login.spec.ts"
+    },
+    {
+      "name": "Login with invalid credentials",
+      "status": "passed",
+      "duration": 4431,
+      "retries": 0,
+      "error": null,
+      "file": "C:\\Users\\Girish Kulkarni\\Documents\\Playwright master framework\\tests\\smoke\\login.spec.ts"
+    },
+    {
+      "name": "Logout flow",
+      "status": "passed",
+      "duration": 4291,
+      "retries": 0,
+      "error": null,
+      "file": "C:\\Users\\Girish Kulkarni\\Documents\\Playwright master framework\\tests\\smoke\\login.spec.ts"
+    },
+    {
+      "name": "@smoke Search with valid keyword",
+      "status": "passed",
+      "duration": 4041,
+      "retries": 0,
+      "error": null,
+      "file": "C:\\Users\\Girish Kulkarni\\Documents\\Playwright master framework\\tests\\smoke\\search.spec.ts"
+    },
+    {
+      "name": "Search with invalid keyword",
+      "status": "passed",
+      "duration": 4191,
+      "retries": 0,
+      "error": null,
+      "file": "C:\\Users\\Girish Kulkarni\\Documents\\Playwright master framework\\tests\\smoke\\search.spec.ts"
+    },
+    {
+      "name": "Navigate category → product list → PDP",
+      "status": "passed",
+      "duration": 4551,
+      "retries": 0,
+      "error": null,
+      "file": "C:\\Users\\Girish Kulkarni\\Documents\\Playwright master framework\\tests\\smoke\\search.spec.ts"
+    }
+  ]
+}
