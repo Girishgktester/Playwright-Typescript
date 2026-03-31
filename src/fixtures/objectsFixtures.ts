@@ -13,6 +13,7 @@ import SearchAssertions from '@pages/SearchAssertions';
 import { CheckoutPage } from '@pages/CheckoutPage';
 import CheckoutAssertion from '@pages/CheckoutAssertion';
 import BasePage from '@utils/BasePage';
+import { LoginPage } from '@pages/ecomm.demo.pages/LoginPage';
 
 type MyFixtures = {
   registerPage: RegisterPage;
@@ -29,6 +30,7 @@ type MyFixtures = {
   checkoutPage: CheckoutPage;
   checkoutAssertion: CheckoutAssertion;
   basePage : BasePage;
+  loginPageE: LoginPage;
 
 };
 
@@ -43,6 +45,10 @@ export const test = base.extend<MyFixtures>({
 
   homePage: async ({ page }, use) => {
     await use(new HomePage(page));
+  },
+
+  loginPageE: async ({ page }, use) => {
+    await use(new LoginPage(page));
   },
 
   homePageAssertion: async ({ page, homePage }, use) => {

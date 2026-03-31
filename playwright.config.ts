@@ -31,7 +31,7 @@ reporter: [
     baseURL: process.env.BASE_URL,
 
     launchOptions: {
-      slowMo: process.env.CI ? 0 : 100,
+      slowMo: process.env.CI ? 0 : 1000,
     },
 
     trace: 'on-first-retry',
