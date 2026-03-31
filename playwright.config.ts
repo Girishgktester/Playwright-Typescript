@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import { ENV } from 'config/env';
 import * as dotenv from 'dotenv';
 
 const env = process.env.ENV;
@@ -44,4 +45,14 @@ reporter: [
       use: { ...devices['Desktop Chrome'] },
     },
   ],
+
+
+  webServer: env === 'stage'
+  ? {
+      command: 'npm run start:stage',
+      url: 'http://localhost:3000',
+      reuseExistingServer: !process.env.CI,
+    }
+  : undefined,
 });
+
