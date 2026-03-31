@@ -11,8 +11,11 @@ on:
           - select
           - dev
           - qa
-          - staging
+          - stage
           - prod
+      grep:
+        description: "Optional tag (e.g. @sanity)"
+        required: false
 
 jobs:
   test:
@@ -21,6 +24,7 @@ jobs:
 
     env:
       TEST_ENV: ${{ github.event.inputs.environment }}
+      GREP: ${{ github.event.inputs.grep }}
 
     steps:
       - uses: actions/checkout@v4
@@ -44,8 +48,14 @@ jobs:
 
       - name: Run Playwright tests
         run: |
-          echo "Running tests on $TEST_ENV"
-          npx playwright test
+          echo "Running on ENV=$TEST_ENV"
+
+          if [ -n "$GREP" ]; then
+            echo "Filtering with grep=$GREP"
+            npx playwright test --grep "$GREP"
+          else
+            npx playwright test
+          fi
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
