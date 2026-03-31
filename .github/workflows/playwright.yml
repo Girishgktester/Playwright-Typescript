@@ -1,39 +1,55 @@
 name: Playwright Tests
+
 on:
   workflow_dispatch:
-     inputs:
+    inputs:
       environment:
         description: "Select environment"
         required: true
-        default: "dev"
         type: choice
         options:
+          - select
           - dev
           - qa
           - staging
           - prod
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
+    env:
+      TEST_ENV: ${{ github.event.inputs.environment }}
+
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Validate environment selection
+        run: |
+          if [ "$TEST_ENV" = "select" ]; then
+            echo "You must select a valid environment"
+            exit 1
+          fi
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        run: |
+          echo "Running tests on $TEST_ENV"
+          npx playwright test
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report-${{ env.TEST_ENV }}
+          path: playwright-report/
+          retention-days: 30
