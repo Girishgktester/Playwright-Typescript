@@ -5,7 +5,6 @@ on:
       environment:
         description: "Select environment"
         required: true
-        default: "dev"
         type: choice
         options:
           - dev
