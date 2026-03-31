@@ -1,29 +1,29 @@
 import { defineConfig, devices } from '@playwright/test';
 import * as dotenv from 'dotenv';
 
+const env = process.env.ENV;
+
+
 // 🔥 Load correct env file
 dotenv.config({
   path: `.env.${process.env.TEST_ENV || 'dev'}`
 });
 
 export default defineConfig({
-  globalSetup: './global-setup.ts',
+  globalSetup: env === 'dev' ? './global-setup.ts' : undefined,
 
   testDir: './tests',
+  testMatch: /.*\.spec\.ts/,
   fullyParallel: true,
 
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 4 : undefined,
 
-//   reporter: [
-//   ['blob']
-// ],
-
 reporter: [
   ['blob'],
-  ['html'],
-  ['./custom-reporter.ts']
+  ['html']
+  // ['./custom-reporter.ts']
 ],
 
 

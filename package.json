@@ -7,7 +7,7 @@
     "test:smoke": "playwright test --grep @smoke",
     "test:regression": "playwright test --grep @regression",
     "test:dev": "cross-env TEST_ENV=dev playwright test",
-    "test:stage": "cross-env TEST_ENV=stage playwright test",
+    "test:stage": "cross-env TEST_ENV=stage playwright test --grep @sanity",
     "test:prod": "cross-env TEST_ENV=prod playwright test"
   },
   "repository": {
@@ -31,5 +31,8 @@
     "dotenv": "^17.3.1",
     "node-fetch": "^3.3.2",
     "tsconfig-paths": "^4.2.0"
+  },
+  "directories": {
+    "test": "tests"
   }
 }

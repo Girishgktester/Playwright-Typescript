@@ -1,7 +1,7 @@
 import { test } from '@fixtures/objectsFixtures';
 
 // 🔹 GUEST TESTS (no login)
-test.describe('Guest cart flow', { tag: ['@smoke'] }, () => {
+test.describe('Guest cart flow', { tag: ['@sanity'] }, () => {
   test.use({ storageState: undefined });
   test('Add invalid quantity', async ({ homePage, homePageAssertion, cartPage, produtAssertion, pdp, basePage, page }) => {
     await basePage.goto('/')

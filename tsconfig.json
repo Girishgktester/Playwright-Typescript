@@ -3,6 +3,9 @@
     "baseUrl": ".",
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "target": "ES5",
+        "lib": ["ES2015", "DOM"],
+
     "paths": {
       "@pages/*": [
         "src/pages/*"
