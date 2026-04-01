@@ -4,8 +4,6 @@ import * as dotenv from 'dotenv';
 
 const env = process.env.ENV;
 
-
-// 🔥 Load correct env file
 dotenv.config({
   path: `.env.${process.env.TEST_ENV || 'dev'}`
 });
@@ -23,7 +21,7 @@ export default defineConfig({
 
   reporter: [
     ['blob'],
-    ['html']
+    ['html', { outputFolder: 'playwright-report', attachmentsBaseURL: 'test-results' }],
     // ['./custom-reporter.ts']
   ],
 

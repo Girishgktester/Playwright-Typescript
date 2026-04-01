@@ -64,4 +64,5 @@ jobs:
           path: |
             playwright-report/
             test-results/
+            blob-report/
           retention-days: 30

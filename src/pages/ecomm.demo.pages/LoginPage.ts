@@ -21,9 +21,9 @@ export class LoginPage {
         await expect(this.loginButton).toBeVisible();
     }
 
-    async verifyLoginToApplication() {
-        await this.emailInput.fill(process.env.USER!);
-        await this.passowrdInput.fill(process.env.PASSWORD!);
+    async verifyLoginToApplication(username?: string, password?: string) {
+        await this.emailInput.fill(username || process.env.USER!);
+        await this.passowrdInput.fill(password || process.env.PASSWORD!);
         await this.loginButton.click();
     }
 
