@@ -21,15 +21,20 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 4 : undefined,
 
-reporter: [
-  ['blob'],
-  ['html']
-  // ['./custom-reporter.ts']
-],
+  reporter: [
+    ['blob'],
+    ['html']
+    // ['./custom-reporter.ts']
+  ],
 
 
   use: {
-    baseURL: process.env.BASE_URL,
+
+    baseURL: process.env.TEST_ENV === 'stage'
+      ? 'http://localhost:3000'
+      : process.env.BASE_URL,
+
+    // baseURL: process.env.BASE_URL,
 
     launchOptions: {
       slowMo: process.env.CI ? 0 : 1000,
@@ -50,11 +55,13 @@ reporter: [
 
 
   webServer: env === 'stage'
-  ? {
-      command: 'npm run start:stage',
+    ? {
+      command: 'npm start', // NOT start:stage unless it really exists
       url: 'http://localhost:3000',
+      timeout: 120000,
+
       reuseExistingServer: !process.env.CI,
     }
-  : undefined,
+    : undefined,
 });
 

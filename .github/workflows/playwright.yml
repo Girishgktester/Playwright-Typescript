@@ -46,6 +46,14 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      # ✅ START WEBSITE ONLY FOR STAGE
+      - name: Start app (stage only)
+        if: ${{ env.TEST_ENV == 'stage' }}
+        run: |
+          echo "Starting local app for STAGE..."
+          npm start &
+          npx wait-on http://localhost:3000
+
       - name: Run Playwright tests
         run: |
           echo "Running on ENV=$TEST_ENV"
