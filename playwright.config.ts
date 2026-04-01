@@ -42,8 +42,8 @@ export default defineConfig({
 
     trace: 'on-first-retry',
     headless: !!process.env.CI,
-    screenshot: 'on',
-    video: 'on',
+    screenshot: process.env.CI ? 'on' : 'only-on-failure',
+    video: process.env.CI ? 'on' : 'retain-on-failure',
   },
 
   projects: [
