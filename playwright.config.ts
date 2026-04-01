@@ -31,7 +31,7 @@ export default defineConfig({
   use: {
 
     baseURL: process.env.TEST_ENV === 'stage'
-      ? 'http://localhost:3000'
+      ? 'https://playwright-ecomm.vercel.app/'
       : process.env.BASE_URL,
 
     // baseURL: process.env.BASE_URL,
@@ -52,16 +52,5 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
   ],
-
-
-  webServer: env === 'stage'
-    ? {
-      command: 'npm start', // NOT start:stage unless it really exists
-      url: 'http://localhost:3000',
-      timeout: 120000,
-
-      reuseExistingServer: !process.env.CI,
-    }
-    : undefined,
 });
 
