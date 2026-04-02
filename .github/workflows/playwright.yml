@@ -57,12 +57,43 @@ jobs:
             npx playwright test
           fi
 
+      # 🔧 FIXED: short-lived artifacts (not 30 days garbage)
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-report-${{ env.TEST_ENV }}
+          name: playwright-report-${{ env.TEST_ENV }}-${{ github.run_number }}
           path: |
             playwright-report/
             test-results/
-            blob-report/
-          retention-days: 30
+          retention-days: 3
+
+      # 🔧 ADDED: persistent report system (last 10 runs)
+
+      - name: Checkout gh-pages
+        if: always()
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Copy report
+        if: always()
+        run: |
+          mkdir -p gh-pages/reports/run-${{ github.run_number }}
+          cp -r playwright-report/* gh-pages/reports/run-${{ github.run_number }}/
+
+      - name: Keep only last 10 runs
+        if: always()
+        run: |
+          cd gh-pages/reports
+          ls -dt run-* | tail -n +11 | xargs rm -rf || true
+
+      - name: Push reports
+        if: always()
+        run: |
+          cd gh-pages
+          git config user.name "ci"
+          git config user.email "ci@example.com"
+          git add .
+          git commit -m "run-${{ github.run_number }}" || echo "no changes"
+          git push
