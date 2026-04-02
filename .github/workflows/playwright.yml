@@ -21,6 +21,8 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     env:
       TEST_ENV: ${{ github.event.inputs.environment }}
