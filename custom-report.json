@@ -1,0 +1,11 @@
+{
+  "summary": {
+    "status": "passed",
+    "total": 0,
+    "passed": 0,
+    "failed": 0,
+    "flaky": 0,
+    "duration": 0.015
+  },
+  "tests": []
+}

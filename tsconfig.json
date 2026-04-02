@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "target": "ES5",
+        "lib": ["ES2015", "DOM"],
+
+    "paths": {
+      "@pages/*": [
+        "src/pages/*"
+      ],
+      "@flows/*": [
+        "src/flows/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@fixtures/*": [
+        "src/fixtures/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@services/*": [
+        "src/services/*"
+      ],
+      "@test-data/*": [
+        "src/test-data/*"
+      ]
+    }
+  }
+}
