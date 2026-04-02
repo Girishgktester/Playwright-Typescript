@@ -97,8 +97,9 @@ jobs:
           cd gh-pages
           git config user.name "ci"
           git config user.email "Girish.gk403@gmail.com"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
           git add .
           git commit -m "run-${{ github.run_number }}" || echo "no changes"
-          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git gh-pages
+          git push -u origin gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
