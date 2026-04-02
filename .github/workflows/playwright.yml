@@ -73,8 +73,9 @@ jobs:
         if: always()
         uses: actions/checkout@v4
         with:
-          ref: gh-pages
-          path: gh-pages
+         ref: gh-pages
+         path: gh-pages
+         fetch-depth: 0
 
       - name: Copy report
         if: always()
