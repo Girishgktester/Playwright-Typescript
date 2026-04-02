@@ -91,9 +91,9 @@ jobs:
       - name: Push reports
         if: always()
         run: |
-          cd gh-pages
+         cd gh-pages
           git config user.name "ci"
-          git config user.email "ci@example.com"
+          git config user.email "Girish.gk403@gmail.com"
           git add .
           git commit -m "run-${{ github.run_number }}" || echo "no changes"
-          git push
+          git push --set-upstream origin gh-pages
