@@ -107,12 +107,12 @@ jobs:
       - name: Prepare merged folder
         run: |
           mkdir merged-blob-reports
-          find all-blob-reports -type f -name '*.json' -exec cp {} merged-blob-reports/ \;
+           cp -r all-blob-reports/blob-report-*/* merged-blob-reports/
 
       # ✅ UPDATED (fixed path)
       - name: Merge into HTML report
         run: |
-          npx playwright merge-reports --reporter html all-blob-reports/blob-report-* 
+              npx playwright merge-reports --reporter html ./merged-blob-reports 
 
       - name: Upload merged report
         uses: actions/upload-artifact@v4
