@@ -65,7 +65,6 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      # ✅ Run with blob reporter (IMPORTANT)
       - name: Run Playwright tests
         run: |
           echo "Running on ENV=$TEST_ENV"
@@ -77,7 +76,6 @@ jobs:
             npx playwright test --shard=${{ matrix.shard }}/3 --reporter=blob
           fi
 
-      # ✅ Upload blob reports (NOT HTML)
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -85,7 +83,6 @@ jobs:
           path: blob-report/
           retention-days: 3
 
-  # ✅ NEW JOB: Merge reports
   merge-reports:
     needs: test
     runs-on: ubuntu-latest
@@ -97,14 +94,25 @@ jobs:
         with:
           node-version: lts/*
 
+      # ✅ ADDED
+      - name: Install dependencies
+        run: npm ci
+
       - name: Download all blob reports
         uses: actions/download-artifact@v4
         with:
           path: all-blob-reports
 
+      # ✅ ADDED (flatten structure)
+      - name: Prepare merged folder
+        run: |
+          mkdir merged-blob-reports
+          find all-blob-reports -type f -name '*.json' -exec cp {} merged-blob-reports/ \;
+
+      # ✅ UPDATED (fixed path)
       - name: Merge into HTML report
         run: |
-          npx playwright merge-reports --reporter html ./all-blob-reports
+          npx playwright merge-reports --reporter html ./merged-blob-reports
 
       - name: Upload merged report
         uses: actions/upload-artifact@v4
