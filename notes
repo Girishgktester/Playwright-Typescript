@@ -11,3 +11,8 @@ npx playwright test --shard=1/2 & ssh user@192.168.1.5 "cd \"C:\Users\user\Docum
 
 //Generate Custom report 
 npx ts-node generate-report.ts
+
+9481
+
+run auto shrading
+npx ts-node scripts/run.ts 
