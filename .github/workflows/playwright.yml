@@ -112,7 +112,7 @@ jobs:
       # ✅ UPDATED (fixed path)
       - name: Merge into HTML report
         run: |
-          npx playwright merge-reports --reporter html ./merged-blob-reports
+          npx playwright merge-reports --reporter html all-blob-reports/blob-report-* 
 
       - name: Upload merged report
         uses: actions/upload-artifact@v4
