@@ -21,6 +21,11 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        shard: [1, 2, 3]
+
     permissions:
       contents: write
 
@@ -35,14 +40,12 @@ jobs:
         with:
           node-version: lts/*
 
-      # ✅ ADDED: Cache node_modules
       - name: Cache node modules
         uses: actions/cache@v4
         with:
           path: node_modules
           key: npm-${{ hashFiles('package-lock.json') }}
 
-      # ✅ ADDED: Cache Playwright browsers
       - name: Cache Playwright browsers
         uses: actions/cache@v4
         with:
@@ -62,58 +65,50 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      # ✅ Run with blob reporter (IMPORTANT)
       - name: Run Playwright tests
         run: |
           echo "Running on ENV=$TEST_ENV"
+          echo "Shard ${{ matrix.shard }}/3"
 
           if [ -n "$GREP" ]; then
-            echo "Filtering with grep=$GREP"
-            npx playwright test --grep "$GREP"
+            npx playwright test --grep "$GREP" --shard=${{ matrix.shard }}/3 --reporter=blob
           else
-            npx playwright test
+            npx playwright test --shard=${{ matrix.shard }}/3 --reporter=blob
           fi
 
-      # 🔧 FIXED: short-lived artifacts (not 30 days garbage)
+      # ✅ Upload blob reports (NOT HTML)
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: playwright-report-${{ env.TEST_ENV }}-${{ github.run_number }}
-          path: |
-            playwright-report/
-            test-results/
+          name: blob-report-${{ matrix.shard }}
+          path: blob-report/
           retention-days: 3
 
-      # 🔧 ADDED: persistent report system (last 10 runs)
+  # ✅ NEW JOB: Merge reports
+  merge-reports:
+    needs: test
+    runs-on: ubuntu-latest
 
-      - name: Checkout gh-pages
-        if: always()
-        uses: actions/checkout@v4
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
-         ref: gh-pages
-         path: gh-pages
-         fetch-depth: 0
+          node-version: lts/*
 
-      - name: Copy report
-        if: always()
-        run: |
-          mkdir -p gh-pages/reports/run-${{ github.run_number }}
-          cp -r playwright-report/* gh-pages/reports/run-${{ github.run_number }}/
+      - name: Download all blob reports
+        uses: actions/download-artifact@v4
+        with:
+          path: all-blob-reports
 
-      - name: Keep only last 10 runs
-        if: always()
+      - name: Merge into HTML report
         run: |
-          cd gh-pages/reports
-          ls -dt run-* | tail -n +11 | xargs rm -rf || true
+          npx playwright merge-reports --reporter html ./all-blob-reports
 
-      - name: Push reports
-        if: always()
-        run: |
-          cd gh-pages
-          git config user.name "ci"
-          git config user.email "Girish.gk403@gmail.com"
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
-          git add .
-          git commit -m "run-${{ github.run_number }}" || echo "no changes"
-          git push -u origin gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload merged report
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-${{ github.run_number }}
+          path: playwright-report/
+          retention-days: 3
